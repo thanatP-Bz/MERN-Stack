@@ -1,0 +1,121 @@
+//react Router
+//react 18 set up
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);
+
+//react routers
+-install react routers  -> npm install react-router-dom@6
+-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+
+Connect BroserRouter
+<BrowserRouter>
+<Routes>
+<Route path="/" element={components} />
+</Routes>
+</BrowserRouter>
+
+//how to set Link
+<Link to=""></Link>
+
+//set up register
+-create state object
+-create useState pass object for initate value
+-set up on submit on form e.target e.preventDefault()
+-set up onChange e.target
+//label htmlFor={name}
+//set input
+-insert onSubmit in form
+-put create value={values.object} type="text" name="name" onChageHandler
+
+//create form component
+const FormRow = ({type,name,value,handleChange, labelText, placeholder})
+-label {labelText || name} htmlFor={name} 
+-input type={type} value={value} name={name} placeholder={placeholder} onChange={handleChange}
+
+//toggle Member in register
+const toggleMember () => {
+setValues({...values, isMatch: !values.isMatch}); } //create as an object
+
+toCheck value 
+{values.isMember}
+
+//set up context
+first create context folder
+-create reducer, actions, appContext
+//in app context
+-import {useState, useReducer, useContext}
+-set defaults state as an object initialState
+-set create context -> const appContext = React.createContext();
+-set AppProvider = ({children}) => {
+    /set state
+    const [state, setState] = useState(initialState);
+/return appContext
+return <appContext.Provider value={{...initialState}}>
+{children}<appContext.Provider>
+ }
+-setGlobal state
+const useAppContext = () => {
+    return useContext(appContext)
+}
+
+export {AppContext, AppProvider, useAppContext};
+
+index.js import {AppProvider} and wrap <App />
+
+-> register.js import {AppUseContext} destructure the value const {isLoading, showAlert} = useAppContext();
+
+//set reducer
+in action.js -> set export const DISPLAY_ALERT = "SHOW_ALERT" 
+
+-> import DISPLAY_ALERT  to reducer.js -> set const reducer = (state, action) => {
+    **check type dont forget return** if (action.type === " DISPLAY_ALERT") {
+      return {
+          **pull default value first**
+            ...state,
+      showAlert: true,
+      alertType: "danger",
+      alertText: "Please provide all value",
+      }
+    }
+      throw new Error(`no such action : ${action.type}`);
+}
+
+-> import reducer to appContext -> set [state, dispatch] = useReducer(reducer, initialState);
+-> create function const displayAlert = () => {
+    dispatch({type: "SHOW_ALERT"})
+}
+-> pass in <AppContext.Provider value=({...state, **displayAlert**})
+-> at Alert.js import {useAppContext}
+let const {alertText,alertType} = useAppContext();
+
+-> Register.js 
+**update info**
+onChageHandler = (e) => {
+    **do not forget pull default values**
+    setValues({...values, [e.target.name]: e.target.value})
+}
+
+setGlobal state
+{displayAlert} = useAppContext();
+
+**check logic**
+onHandlerSubmit = (e) => {
+const onSubmit = (e) => {
+  e.preventDefault();
+  const { name, email, password, isMember } = values;
+  if (!email || !password || (!isMember && !name)) {
+    displayAlert();
+    return;
+  }
+  console.log(values);
+};
+}
+**clear pop up**
+action.js
+-> set export clearAlert 
+reducer 
