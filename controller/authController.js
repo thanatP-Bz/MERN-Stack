@@ -1,12 +1,14 @@
 import User from "../model/User.js";
 
 const register = async (req, res) => {
-  try {
-    const user = await User.create(req.body);
-    res.status(201).json({ user });
-  } catch (error) {
-    res.status(500).json({ msg: "there was an error" });
+  let { name, password, email } = req.body;
+
+  if ((!name || !password, !email)) {
+    throw new Error("please provide all values");
   }
+
+  const user = await User.create({ name, password, email });
+  res.status(201).json({ user });
 };
 
 const login = async (req, res) => {
