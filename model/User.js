@@ -1,7 +1,9 @@
+import dotenv from "dotenv";
+dotenv.config();
 import mongoose from "mongoose";
 import validator from "validator";
 import bcrypt from "bcryptjs";
-import jsonwebtoken from "jsonwebtoken";
+import JWT from "jsonwebtoken";
 
 const UserSchema = new mongoose.Schema({
   name: {
@@ -48,7 +50,9 @@ UserSchema.pre("save", async function () {
 });
 
 UserSchema.methods.createJWT = function () {
-  console.log(this);
+  return JWT.sign({ userId: this._id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_LIFETIME,
+  });
 };
 
 export default mongoose.model("User", UserSchema);
