@@ -17,3 +17,21 @@ res.statusCode(201).json({name, password, email});
 
 -> at error-handler 
 msg: err.message || "message"
+
+//prevent duplicate email
+-> controller 
+const userAlreadyExists = await User.findOne({email})
+if(userAlreadyExists) {
+  throw new Error("")
+}
+
+//hash password
+install bcript.js
+and use mongoose middleware ** don't use arrow function
+
+UserSchema.pre("save", async function () {
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+});
+
+//set JWT
