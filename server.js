@@ -20,8 +20,8 @@ import errorHandlerMiddleware from "./middleware/error-handler.js";
 //parse json
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("Welcome! sever side");
+app.get("/api2", (req, res) => {
+  res.json({ smg: "Welcome! sever side" });
 });
 
 //routes

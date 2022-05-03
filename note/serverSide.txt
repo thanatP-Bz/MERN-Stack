@@ -35,3 +35,11 @@ UserSchema.pre("save", async function () {
 });
 
 //set JWT
+
+
+
+//install cors 
+set up cors in the server as the middleware
+
+//proxy
+
