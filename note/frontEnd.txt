@@ -120,3 +120,31 @@ action.js
 -> set export clearAlert 
 reducer 
 
+//set up login user
+-> app context add
+user : null,
+token: null,
+userLocation: ""
+
+->action
+REGISTER_USER_BEGIN
+REGISTER_USER_SUCCESS
+REGISTER_USER_ERROR
+
+->app context
+import -> REGISTER_USER_BEGIN
+REGISTER_USER_SUCCESS
+REGISTER_USER_ERROR
+
+set function 
+const registerUser = async (currentUser) => {
+  console.log(currentUser)
+}
+
+->register
+const currentUser = {name, email, password}
+check if (isMember) {
+  console.log("already a Member")
+} else {
+  registerUser(currentUser)
+}
