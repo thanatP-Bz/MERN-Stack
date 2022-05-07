@@ -43,3 +43,28 @@ set up cors in the server as the middleware
 
 //proxy
 
+-> appContent
+  const registerUser = async (currentUser) => {
+    dispatch({type: REGISTER_USER_BEGIN})
+   
+  };
+-pass to value
+-> import to register
+ const currentUser = { name, email, password };
+    if (isMember) {
+      console.log("already a member");
+    } else {
+      registerUser(currentUser);
+    }
+
+->action 
+export const REGISTER_USER_BEGIN = "REGISTER_USER_BEGIN";
+export const REGISTER_USER_SUCCESS = "REGISTER_USER_SUCCESS";
+export const REGISTER_USER_ERROR = "REGISTER_USER_ERROR";
+
+->reducer
+
+
+//install axios
+
+
