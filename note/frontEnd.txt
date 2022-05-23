@@ -66,6 +66,19 @@ const useAppContext = () => {
 export {AppContext, AppProvider, useAppContext};
 
 index.js import {AppProvider} and wrap <App />
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import { AppProvider } from "./context/AppContext";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <AppProvider>
+    <App />
+  </AppProvider>
+);
+
 
 -> register.js import {AppUseContext} destructure the value const {isLoading, showAlert} = useAppContext();
 
