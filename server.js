@@ -2,9 +2,15 @@ import dotenv from "dotenv";
 dotenv.config();
 import express from "express";
 const app = express();
+import morgan from "morgan";
 
 //error handler
 import "express-async-errors";
+
+//morgan
+if (process.env.NODE_ENV !== "production") {
+  app.use(morgan("dev"));
+}
 
 //routers
 import authRouter from "./routes/authRoutes.js";
